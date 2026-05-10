@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const FAQ = [
+const ITEMS = [
   {
     q: "What areas do you serve?",
     a: "We serve homes and businesses throughout the local area and surrounding neighborhoods. Send us your address on WhatsApp and we'll confirm coverage instantly.",
@@ -44,7 +44,7 @@ export function FAQ() {
         </div>
         <div className="mx-auto mt-10 max-w-3xl">
           <Accordion type="single" collapsible className="space-y-3">
-            {FAQ.map((item, i) => (
+            {ITEMS.map((item, i) => (
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
