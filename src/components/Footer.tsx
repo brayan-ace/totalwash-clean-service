@@ -1,25 +1,20 @@
 import { MessageCircle, MapPin, Phone, Facebook, Instagram, Twitter } from "lucide-react";
 import { Logo } from "./Logo";
 import { whatsappLink, WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import { useT } from "@/lib/i18n";
 
-const QUICK = [
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#why", label: "Why Us" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#faq", label: "FAQ" },
+const QUICK_KEYS = [
+  { href: "#about", k: "nav.about" },
+  { href: "#services", k: "nav.services" },
+  { href: "#why", k: "nav.why" },
+  { href: "#gallery", k: "nav.gallery" },
+  { href: "#faq", k: "nav.faq" },
 ];
 
-const SERVICES = [
-  "Home Cleaning",
-  "Office Cleaning",
-  "Deep Cleaning",
-  "Airbnb Turnover",
-  "Post-Construction",
-  "Restaurant Cleaning",
-];
+const SERVICE_KEYS = ["services.s1.t","services.s2.t","services.s3.t","services.s11.t","services.s6.t","services.s10.t"];
 
 export function Footer() {
+  const { t } = useT();
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container-tw py-16">
@@ -27,44 +22,43 @@ export function Footer() {
           <div>
             <Logo variant="light" />
             <p className="mt-4 text-sm leading-relaxed text-primary-foreground/70">
-              Professional cleaning services for homes, offices and businesses
-              you can rely on.
+              {t("ft.desc")}
             </p>
             <a
-              href={whatsappLink()}
+              href={whatsappLink(t("wa.default"))}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-5 inline-flex items-center gap-2 rounded-full bg-whatsapp px-4 py-2.5 text-sm font-semibold text-whatsapp-foreground transition-all hover:brightness-110"
             >
               <MessageCircle className="h-4 w-4" strokeWidth={2.4} />
-              Book on WhatsApp
+              {t("nav.book")}
             </a>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/90">Quick links</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/90">{t("ft.quick")}</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {QUICK.map((l) => (
+              {QUICK_KEYS.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="text-primary-foreground/70 transition-colors hover:text-accent">{l.label}</a>
+                  <a href={l.href} className="text-primary-foreground/70 transition-colors hover:text-accent">{t(l.k)}</a>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/90">Services</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/90">{t("ft.services")}</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {SERVICES.map((s) => (
+              {SERVICE_KEYS.map((s) => (
                 <li key={s}>
-                  <a href="#services" className="text-primary-foreground/70 transition-colors hover:text-accent">{s}</a>
+                  <a href="#services" className="text-primary-foreground/70 transition-colors hover:text-accent">{t(s)}</a>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/90">Contact</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/90">{t("ft.contact")}</h4>
             <ul className="mt-4 space-y-3 text-sm text-primary-foreground/70">
               <li className="flex items-start gap-2.5">
                 <Phone className="mt-0.5 h-4 w-4 flex-none text-accent" />
@@ -72,7 +66,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 flex-none text-accent" />
-                <a href="https://maps.app.goo.gl/Xnkt5ckVPjoa5cPbA" target="_blank" rel="noopener noreferrer" className="hover:text-accent">View on Google Maps</a>
+                <a href="https://maps.app.goo.gl/Xnkt5ckVPjoa5cPbA" target="_blank" rel="noopener noreferrer" className="hover:text-accent">Google Maps</a>
               </li>
             </ul>
             <div className="mt-5 flex gap-2">
@@ -90,8 +84,8 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-primary-foreground/10 pt-6 text-xs text-primary-foreground/60 sm:flex-row">
-          <p>© {new Date().getFullYear()} Total Wash Cleaning Service. All rights reserved.</p>
-          <p>Crafted with care for clean spaces.</p>
+          <p>© {new Date().getFullYear()} Total Wash Cleaning Service. {t("ft.copy")}</p>
+          <p>{t("ft.tag")}</p>
         </div>
       </div>
     </footer>

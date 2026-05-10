@@ -2,18 +2,19 @@ import { useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { Logo } from "./Logo";
 import { whatsappLink } from "@/lib/whatsapp";
-
-const NAV = [
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
-  { href: "#why", label: "Why Us" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
-];
+import { useT, LanguageToggle } from "@/lib/i18n";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const { t } = useT();
+  const NAV = [
+    { href: "#services", label: t("nav.services") },
+    { href: "#about", label: t("nav.about") },
+    { href: "#why", label: t("nav.why") },
+    { href: "#gallery", label: t("nav.gallery") },
+    { href: "#faq", label: t("nav.faq") },
+    { href: "#contact", label: t("nav.contact") },
+  ];
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
       <div className="container-tw flex h-16 items-center justify-between">
@@ -30,14 +31,15 @@ export function Navbar() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          <LanguageToggle />
           <a
-            href={whatsappLink()}
+            href={whatsappLink(t("wa.default"))}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden items-center gap-2 rounded-full bg-whatsapp px-4 py-2.5 text-sm font-semibold text-whatsapp-foreground shadow-soft transition-all hover:brightness-110 sm:inline-flex"
           >
             <MessageCircle className="h-4 w-4" strokeWidth={2.4} />
-            Book on WhatsApp
+            {t("nav.book")}
           </a>
           <button
             onClick={() => setOpen(!open)}
@@ -62,13 +64,13 @@ export function Navbar() {
               </a>
             ))}
             <a
-              href={whatsappLink()}
+              href={whatsappLink(t("wa.default"))}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-4 py-3 text-sm font-semibold text-whatsapp-foreground"
             >
               <MessageCircle className="h-4 w-4" />
-              Book on WhatsApp
+              {t("nav.book")}
             </a>
           </div>
         </div>
